@@ -33,7 +33,7 @@ pipeline{
                 unstash 'app'
                 sh 'docker ps -f name=helloapp -q | xargs --no-run-if-empty docker container stop'
                 sh 'docker container ls -a -fname=helloapp -q | xargs -r docker container rm'
-                sh 'docker buil -t helloapp'
+                sh 'docker buil -t helloapp .'
                 sh 'docker run -itd -p 8081:8080 --name helloapp helloapp:latest'
             }
         }
