@@ -18,6 +18,8 @@ pipeline{
                 }
             }
             steps{
+               sh 'ls'
+               sh 'ls /root/.m2'
                sh 'mvn -X -U clean isntall'
                stash includes: '**/*.war',name: 'app'
           }
