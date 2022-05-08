@@ -20,7 +20,7 @@ pipeline{
             steps{
                sh 'ls'
                sh 'ls /root/.m2'
-               sh 'mvn clean isntall'
+               sh 'mvn clean install'
                stash includes: '**/*.war',name: 'app'
           }
         }
