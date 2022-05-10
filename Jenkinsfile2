@@ -23,6 +23,12 @@ pipeline{
                stash includes: '**/*.war',name: 'app'
           }
         }
+        stage ( 'create image' ) {
+            sh "docker build  -t   192.168.57.129:8000/java/helloworld:${BUILD_NUMBER}"
+            // sh "docker login -u admin -p admin 192.168.1.109:5000"
+            sh "docker push 192.168.57.129:8000/java/helloworld:${BUILD_NUMBER}"
+        }
+
     stage('Deploy'){
         steps{
             echo "Deployding..."
