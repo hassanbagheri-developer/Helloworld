@@ -14,7 +14,7 @@ pipeline{
                sh 'ls'
                sh 'ls /root/.m2'
                sh 'mvn clean install'
-               stash includes: '**/*.war',name: 'app'
+         //      stash includes: '**/*.war',name: 'app'
           }
         }
         stage ( 'create image' ) {
