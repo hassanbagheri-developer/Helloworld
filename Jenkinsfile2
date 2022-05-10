@@ -27,7 +27,7 @@ pipeline{
 
     stage('Deploy'){
         steps{
-            echo "Deployding..."
+            sh "docker run -tid -p 9999:8080 --rm --name helloapp  192.168.57.129:8000/java/helloworld:${BUILD_NUMBER}"
         }
     }
         
