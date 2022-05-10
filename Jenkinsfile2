@@ -1,12 +1,6 @@
 pipeline{
     agent any
     stages{
-        stage('checkout'){
-            steps{
-                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs:
-                [[url: 'https://github.com/hassanbagheri-developer/Helloworld.git']]])          
-            }
-        }
         stage('Build'){
             agent{
                 docker{
@@ -24,9 +18,11 @@ pipeline{
           }
         }
         stage ( 'create image' ) {
-            sh "docker build  -t   192.168.57.129:8000/java/helloworld:${BUILD_NUMBER}"
-            // sh "docker login -u admin -p admin 192.168.1.109:5000"
-            sh "docker push 192.168.57.129:8000/java/helloworld:${BUILD_NUMBER}"
+            steps{
+                sh "docker build  -t   192.168.57.129:8000/java/helloworld:${BUILD_NUMBER}"
+                // sh "docker login -u admin -p admin 192.168.1.109:5000"
+                sh "docker push 192.168.57.129:8000/java/helloworld:${BUILD_NUMBER}"
+            }
         }
 
     stage('Deploy'){
