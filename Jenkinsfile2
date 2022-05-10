@@ -27,7 +27,9 @@ pipeline{
 
     stage('Deploy'){
         steps{
-            sh "docker run -tid -p 9999:8080 --rm --name helloapp  192.168.57.129:8000/java/helloworld:${BUILD_NUMBER}"
+                sh 'docker ps -f name=helloapp -q | xargs --no-run-if-empty docker container stop'
+                sh 'docker container ls -a -fname=helloapp -q | xargs -r docker container rm'
+                sh "docker run -tid -p 9999:8080 --rm --name helloapp  192.168.57.129:8000/java/helloworld:${BUILD_NUMBER}"
         }
     }
         
