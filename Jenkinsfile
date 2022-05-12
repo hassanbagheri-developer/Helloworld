@@ -35,6 +35,10 @@ pipeline{
                 sh 'docker container ls -a -fname=helloapp -q | xargs -r docker container rm'
                 sh 'docker build -t helloapp .'
                 sh 'docker run -itd -p 8082:8080 --name helloapp helloapp:latest'
+                
+                
+                sh 'ip a'
+                sh 'docker images'
             }
         }
     }
