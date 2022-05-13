@@ -26,9 +26,9 @@ pipeline{
         }
         
         stage('Test API'){
-              steps {
+             steps {
               script {
-
+                dir ('postman') {
                     try {
                         sh 'npm run api-test'
                         currentBuild.result = "SUCCESS"
@@ -36,9 +36,8 @@ pipeline{
                     catch (exc) {
                         currentBuild.result = "FAILURE"
                         }
-                    
-
                     junit 'newman.xml'
+                    }
                 }
             }
         }
