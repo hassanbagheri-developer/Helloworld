@@ -31,7 +31,9 @@ pipeline{
                 dir ('postman') {
                     try {
                         sh 'pwd'
-                        sh 'npm run api-test'
+                        sh '/usr/local/bin/newman run Test_Api_in_Jenkins.postman_collection.json --reporters cli,junit --reporter-junit-export newman.xml
+'
+//                        sh 'npm run api-test'
                         currentBuild.result = "SUCCESS"
                         }
                     catch (exc) {
