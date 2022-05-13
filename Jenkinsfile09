@@ -44,6 +44,22 @@ pipeline{
             }
         }
 
+        stage('Unit Test') {
+            steps {
+              sh 'whoami'
+              script {
+                try {
+                    sh 'pwd'
+                    sh 'mvn test'
+                    currentBuild.result = "SUCCESS"
+                    }
+                catch (exc) {
+                    currentBuild.result = "FAILURE"
+                    }
+                junit '**/target/surefire-reports/TEST*.xml'
+                }
+            }
+        }
 
     //     stage('Deploy'){
     //     steps{
