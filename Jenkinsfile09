@@ -24,8 +24,25 @@ pipeline{
                 sh "docker push 192.168.57.131:8000/java/helloworld:${BUILD_NUMBER}"
             }
         }
+        
+        stage('Test API'){
+              steps {
+              script {
 
-    stage('Deploy'){
+                    try {
+                        sh 'newman run TestGithub.postman_collection.json --reporter-junit-export newman.xml'
+                        currentBuild.result = "SUCCESS"
+                        }
+                    catch (exc) {
+                        currentBuild.result = "FAILURE"
+                        }
+                    junit 'newman.xml'
+                }
+            }
+        }
+
+
+        stage('Deploy'){
         steps{
                 sh 'docker ps -f name=helloapp -q | xargs --no-run-if-empty docker container stop'
                 sh 'docker container ls -a -fname=helloapp -q | xargs -r docker container rm'
