@@ -30,6 +30,7 @@ pipeline{
               script {
                 dir ('postman') {
                     try {
+                        sh 'ip a'
                         sh 'pwd'
                         sh '/usr/local/bin/newman run openweathermap.postman_collection.json --reporters cli,junit --reporter-junit-export newman.xml'
 //                        sh 'npm run api-test'
