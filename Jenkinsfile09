@@ -66,7 +66,7 @@ pipeline{
         stage('Docker Swarm'){
             steps {
               //  sh 'docker service create --name helloapp -p 9999:8080 --replicas 5 192.168.57.133:8000/java/helloworld:${BUILD_NUMBER}'
-                sh 'docker service update  --with-registry-auth --image 192.168.57.133:8000/java/helloworld:${BUILD_NUMBER}  --update-parallelism 1 --update-delay 10s firstweb_image'
+                sh 'docker service update  --with-registry-auth --image 192.168.57.133:8000/java/helloworld:${BUILD_NUMBER} --update-parallelism 1 --update-delay 10s helloapp'
             }
         }
 
