@@ -10,6 +10,7 @@ pipeline{
                 }
             }
             steps{
+               sh 'rm -rf target'
                sh 'pwd'
                sh 'ls'
                sh 'ls /root/.m2'
