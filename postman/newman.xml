@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Test Api in Jenkins" tests="1" time="1.824">
+  <testsuite name="select by categori Copy" id="13aa806a-37b1-470a-9562-bd72b331a974" timestamp="2021-12-27T06:38:49.010Z" tests="4" failures="0" errors="0" time="1.824">
+    <testcase name="Status code is 200" time="1.824" classname="TestApiInJenkins"/>
+    <testcase name="Response time is less than 200ms" time="1.824" classname="TestApiInJenkins"/>
+    <testcase name="Body matches string" time="1.824" classname="TestApiInJenkins"/>
+    <testcase name="Your test name" time="1.824" classname="TestApiInJenkins"/>
+  </testsuite>
+</testsuites>

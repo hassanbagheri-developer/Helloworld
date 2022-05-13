@@ -1,0 +1,92 @@
+{
+	"info": {
+		"_postman_id": "022c3363-c2fd-48ac-908e-6f43f8c77608",
+		"name": "Test Api in Jenkins",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "select by categori Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(20000);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"id\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Your test name\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.status).to.eql(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"// ####\r",
+							"\r",
+							"pm.environment.get(\"variable_key\");\r",
+							"pm.globals.get(\"variable_key\");\r",
+							"\r",
+							"pm.variables.get(\"variable_key\");\r",
+							"pm.environment.set(\"variable_key\", \"variable_value\");\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://hasanlo.ir/android/shop/webservice/project/ws_tb.php?type=select&table=products&column=type&value=new_prodect",
+					"protocol": "http",
+					"host": [
+						"hasanlo",
+						"ir"
+					],
+					"path": [
+						"android",
+						"shop",
+						"webservice",
+						"project",
+						"ws_tb.php"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "select"
+						},
+						{
+							"key": "table",
+							"value": "products"
+						},
+						{
+							"key": "column",
+							"value": "type"
+						},
+						{
+							"key": "value",
+							"value": "new_prodect"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

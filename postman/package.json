@@ -1,0 +1,9 @@
+{
+  "name": "postman",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "api-test": "/usr/local/bin/newman run Test_Api_in_Jenkins.postman_collection.json --reporters cli,junit --reporter-junit-export newman.xml"
+  },
+  "author": ""
+}
