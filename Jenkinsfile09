@@ -30,6 +30,7 @@ pipeline{
               script {
                 dir ('postman') {
                     try {
+                        sh 'pwd'
                         sh 'npm run api-test'
                         currentBuild.result = "SUCCESS"
                         }
