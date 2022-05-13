@@ -38,6 +38,8 @@ pipeline{
                     catch (exc) {
                         currentBuild.result = "FAILURE"
                         }
+                    sh 'ls'
+                    sh 'pwd'
                     junit 'newman.xml'
                 }
             }
