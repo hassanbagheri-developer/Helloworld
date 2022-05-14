@@ -18,6 +18,7 @@ pipeline{
           }
         }
          stage ( 'create image' ) {
+             agent 'Agent01'
              steps{
                 sh 'ip a'
                 sh 'pwd'
