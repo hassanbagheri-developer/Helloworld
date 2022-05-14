@@ -4,7 +4,7 @@
 </head>
 <body>
     <h1>Hello World!</h1>
-    <h3>Version 25</h3>
+    <h3>Version 26</h3>
     <p>
         It is now
         <%= new java.util.Date()%>
