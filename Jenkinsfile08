@@ -19,7 +19,7 @@ pipeline{
           }
         }
         stage ( 'create image' ) {
-            agent { label 'master'}
+            agent any
             steps{
                 sh 'pwd'
                 sh 'ls'
