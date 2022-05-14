@@ -30,6 +30,7 @@ pipeline{
         }
 
     stage('Deploy'){
+        agent any
         steps{
                 sh 'docker ps -f name=helloapp -q | xargs --no-run-if-empty docker container stop'
                 sh 'docker container ls -a -fname=helloapp -q | xargs -r docker container rm'
