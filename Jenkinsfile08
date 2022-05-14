@@ -19,7 +19,7 @@ pipeline{
           }
         }
         stage ( 'create image' ) {
-            agent { label 'Built-In Node'}
+            agent { label 'master'}
             steps{
                 sh 'pwd'
                 sh 'ls'
