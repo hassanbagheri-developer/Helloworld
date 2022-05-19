@@ -15,7 +15,7 @@ pipeline{
               // stash includes: '**/*.war',name: 'app'
           }
         }
-         stage('deploy'){
+         stage('Deploy'){
             agent any
             steps{
                 //unstash 'app'
