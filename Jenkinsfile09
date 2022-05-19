@@ -10,18 +10,13 @@ pipeline{
                 }
             }
             steps{
-              sh 'pwd'
-              sh 'ls'
-              sh 'ls /root/.m2'
               sh 'mvn clean install'
-        //  //      stash includes: '**/*.war',name: 'app'
+        //    stash includes: '**/*.war',name: 'app'
           }
         }
          stage ( 'create image' ) {
              agent { label 'Agent01' }
              steps{
-                sh 'ip a'
-                sh 'pwd'
                 sh "docker build  -t   192.168.57.131:8000/java/helloworld:${BUILD_NUMBER} ."
                 // sh "docker login -u docker -p 4321 192.168.57.131:5000"
                  sh "docker push 192.168.57.131:8000/java/helloworld:${BUILD_NUMBER}"
@@ -33,10 +28,7 @@ pipeline{
               script {
                 dir ('postman') {
                     try {
-                        sh 'ip a'
-                        sh 'pwd'
                         sh '/usr/local/bin/newman run openweathermap.postman_collection.json --reporters cli,junit --reporter-junit-export newman.xml'
-//                        sh 'npm run api-test'
                         currentBuild.result = "SUCCESS"
                         }
                     catch (exc) {
@@ -50,10 +42,8 @@ pipeline{
 
         stage('Unit Test') {
             steps {
-              sh 'whoami'
               script {
                 try {
-                    sh 'pwd'
                     sh 'mvn test'
                     currentBuild.result = "SUCCESS"
                     }
@@ -74,14 +64,15 @@ pipeline{
             }
         }
 
-
-    //     stage('Deploy'){
-    //     steps{
-    //             sh 'docker ps -f name=helloapp -q | xargs --no-run-if-empty docker container stop'
-    //             sh 'docker container ls -a -fname=helloapp -q | xargs -r docker container rm'
-    //             sh "docker run -tid -p 9999:8080 --rm --name helloapp  192.168.57.131:8000/java/helloworld:${BUILD_NUMBER}"
-    //     }
-    // }
-        
+        stage('JIRA') {
+            agent { label 'Agent01' }
+            steps {
+              script {
+                response = jiraAddComment site: 'jira' , idOrKey: 'TEST-4' ,  comment : "${JOB_NAME} => ${BUILD_NUMBER} - BUILD URL : ${BUILD_URL} => Status Job = ${currentBuild.currentResult}"
+                jiraUploadAttachment file: 'Jenkinsfile', idOrKey: 'TEST-4', site: 'jira'
+                
+                }
+            }
+        }    
     }
 }
