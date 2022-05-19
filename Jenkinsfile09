@@ -1,6 +1,7 @@
 pipeline{
     agent { node { label 'Agent01' }}
     stages{
+        
         stage('Build'){
             agent{
                 docker{
@@ -13,7 +14,8 @@ pipeline{
               sh 'mvn clean install'
           }
         }
-         stage ( 'create image' ) {
+        
+        stage ('create image' ) {
              agent { label 'Agent01' }
              steps{
                 sh "docker build  -t   192.168.57.131:8000/java/helloworld:${BUILD_NUMBER} ."
@@ -53,7 +55,6 @@ pipeline{
                 }
             }
         }
-        
         
         stage('Docker Swarm'){
             steps {
