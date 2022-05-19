@@ -10,19 +10,13 @@ pipeline{
                 }
             }
             steps{
-               sh 'rm -rf target'
-               sh 'pwd'
-               sh 'ls'
                sh 'ls /root/.m2'
                sh 'mvn clean install'
-         //      stash includes: '**/*.war',name: 'app'
           }
         }
         stage ( 'create image' ) {
             agent any
             steps{
-                sh 'pwd'
-                sh 'ls'
                 sh "docker build  -t   192.168.57.131:8000/java/helloworld:${BUILD_NUMBER} ."
                 // sh "docker login -u docker -p 4321 192.168.57.131:5000"
                 sh "docker push 192.168.57.131:8000/java/helloworld:${BUILD_NUMBER}"
