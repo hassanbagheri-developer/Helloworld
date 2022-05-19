@@ -11,16 +11,12 @@ pipeline{
                 }
             }
             steps{
-               sh 'ls /root/.m2'
                sh 'mvn clean install'
               // stash includes: '**/*.war',name: 'app'
           }
         }
          stage('deploy'){
             agent any
-            /* agent{
-                // label 'Agent01'
-            }*/
             steps{
                 //unstash 'app'
                 sh 'docker ps -f name=helloapp -q | xargs --no-run-if-empty docker container stop'
