@@ -11,7 +11,6 @@ pipeline{
             }
             steps{
               sh 'mvn clean install'
-        //    stash includes: '**/*.war',name: 'app'
           }
         }
          stage ( 'create image' ) {
@@ -59,7 +58,7 @@ pipeline{
         stage('Docker Swarm'){
             steps {
                // sh 'docker service create --name helloapp -p 9999:8080 --replicas 2 192.168.57.131:8000/java/helloworld:${BUILD_NUMBER}'
-                sh 'docker service update  --with-registry-auth --image 192.168.57.131:8000/java/helloworld:${BUILD_NUMBER} --update-parallelism 1 --update-delay 20s helloapp'
+                sh 'docker service update  --with-registry-auth --image 192.168.57.131:8000/java/helloworld:${BUILD_NUMBER} --update-parallelism 1 --update-delay 10s helloapp'
                 sh 'docker ps --filter status=exited -q | xargs -r docker container rm'
             }
         }
